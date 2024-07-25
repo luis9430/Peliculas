@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('review_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('movie_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->text('comment_text');
             $table->timestamps();
+
+            // Clave foránea hacia la tabla movies
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            // Clave foránea hacia la tabla users (asumiendo que tienes una tabla users)
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      */
@@ -28,3 +32,6 @@ return new class extends Migration
         Schema::dropIfExists('comments');
     }
 };
+
+
+

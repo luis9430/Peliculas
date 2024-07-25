@@ -6,14 +6,19 @@ use App\Http\Controllers\BaseCrudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use JetBrains\PhpStorm\ArrayShape;
+/* 
+En este controlador se realiza el registro de usuarios 
+utiliza el controlador  BaseCrudController , hereda sus metodos 
+se necesita llamar al modelo como string y agregar la ruta donde se encuentra
+
+*/
+
 
 class RegisterController extends BaseCrudController
 {
     protected $modelClass = 'App\Models\User';
 
-    #[ArrayShape(['name' => "string", 'email' => "string", 'password' => "string"])]
-    protected function getStoreValidationRules(): array
+    protected function getStoreValidationRules(): array // agregando un array de los campos que necesitamos guardar se realiza una sobrecarga del metodo
     {
         return [
             'name' => 'required|string|max:255',
@@ -22,18 +27,15 @@ class RegisterController extends BaseCrudController
         ];
     }
 
-    public function store(Request $request)
+    public function store(Request $request) 
     {
-        Log::info('Entrando al método store en RegisterController');
 
         try {
             $validatedData = $request->validate($this->getStoreValidationRules());
-            Log::info('Datos validados:', $validatedData);
-
             $validatedData['password'] = Hash::make($validatedData['password']);
-            Log::info('Password hasheada');
 
-            return parent::store(new Request($validatedData));
+            return parent::store(new Request($validatedData));       // Llama al método store del controlador padre (BaseCrudController) con los datos validados
+
         } catch (\Exception $e) {
             Log::error('Error en RegisterController@store:', ['exception' => $e]);
             return response()->json(['error' => 'Error al procesar la solicitud'], 500);
