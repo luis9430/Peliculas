@@ -14,12 +14,14 @@ Route::get('login', function () {
 
 
 Route::get('register', function () {
-    return view('auth.register');
+return view('auth.register');
 })->name('register');
 
 
-Route::resource('movies', MoviesController::class);
-
+Route::get('/home', function () {
+    return view('movies.index');
+});
+//->middleware('auth:sanctum');//no redirige si se agrega la proteccion con el middleware   (posible error en CORS) el token si se guarda y se utiliza  en /home para los permisos de la api
 
 
 

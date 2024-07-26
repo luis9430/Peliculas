@@ -19,7 +19,11 @@ Route::post('register', [RegisterController::class, 'store']);
 
 // proteger rutas
 
-Route::get('List', [ListController::class, 'index']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::Resource('movies', MoviesController::class);
+    Route::get('List', [ListController::class, 'index']);
 Route::get('Details', [DetailController::class, 'index']);
 Route::resource('comments', CommentController::class);
-Route::resource('movies', MoviesController::class);
+
+});

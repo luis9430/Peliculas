@@ -10,6 +10,10 @@
 ##### - Entrar a la carpeta y en la linea de comandos ejecutar: <span style="color:#578574"> Composer update </span>
 ##### - Ejecutar el comando : <span style="color:#578574"> php artisan migrate </span> 
 ##### - Ejecutar el comando:  <span style="color:#578574"> php artisan key:generate </span> 
+##### - Ejecutar el comando:  <span style="color:#578574">npm install </span> 
+##### - Ejecutar el comando:  <span style="color:#578574"> npm run build </span> 
+##### - Ejecutar el comando:  <span style="color:#578574"> npm run dev </span> 
+
 
 #
 #####  <p align="center" > existen 3 maneras de entrar  </p>
