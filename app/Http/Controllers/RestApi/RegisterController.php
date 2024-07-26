@@ -6,9 +6,11 @@ use App\Http\Controllers\BaseCrudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-/* 
-En este controlador se realiza el registro de usuarios 
-utiliza el controlador  BaseCrudController , hereda sus metodos 
+use Illuminate\Validation\ValidationException;
+
+/*
+En este controlador se realiza el registro de usuarios
+utiliza el controlador  BaseCrudController , hereda sus metodos
 se necesita llamar al modelo como string y agregar la ruta donde se encuentra
 
 */
@@ -27,18 +29,20 @@ class RegisterController extends BaseCrudController
         ];
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
-
         try {
             $validatedData = $request->validate($this->getStoreValidationRules());
             $validatedData['password'] = Hash::make($validatedData['password']);
 
-            return parent::store(new Request($validatedData));       // Llama al método store del controlador padre (BaseCrudController) con los datos validados
-
+            return parent::store(new Request($validatedData));
+        } catch (ValidationException $e) {
+            Log::error('Error de validación en RegisterController@store:', ['exception' => $e]);
+            return response()->json(['error' => 'Error de validación', 'messages' => $e->errors()], 422);
         } catch (\Exception $e) {
             Log::error('Error en RegisterController@store:', ['exception' => $e]);
-            return response()->json(['error' => 'Error al procesar la solicitud'], 500);
+            return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], 500);
         }
     }
+
 }
