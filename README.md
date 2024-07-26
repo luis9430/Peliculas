@@ -22,12 +22,26 @@
 ## <p align="center" > API REST
 
 ##### -  se ubican en app/http/Controllers/RestApi
+#
+####  <p align="center" > BaseCrudController.php
+#
+
+#####  su ubicacion es app/http/Controllers/BaseCrudController.php
+##### con ese metodo se generan las funciones principales
+
+##### - consultar por condicion (where) y seleccionar campos en la consulta (select)
+##### - admite relaciones (with)
+##### - metodo para create , update, delete 
+##### - se reutiliza para el crud de comentarios y peliculas
+##### - dentro de BaseCrudController.php vienen comentarios que explican el funcionamiento 
+
+
 
 
 
 ## <p align="center" > endpoints
 
-##### - Todos los endpoints deben tener una url de inicio seguido del endpoint ejemplo 
+##### - Todos los endpoints deben tener una url de inicio seguido del endpoint ejemplo :
 
 http://127.0.0.1:8000/api/Details
 peliculas.test/api/Details
