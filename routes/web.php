@@ -8,24 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function () {
-    return view('auth.login');
-})->name('login');
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::get('register', function () {
-return view('auth.register');
-})->name('register');
-
-
-Route::get('/home', function () {
-    return view('movies.index');
-});
-//->middleware('auth:sanctum');//no redirige si se agrega la proteccion con el middleware   (posible error en CORS) el token si se guarda y se utiliza  en /home para los permisos de la api
-
-
-
-
-
-
-
+Route::get('/pelicula/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('movies.show');

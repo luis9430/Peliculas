@@ -13,17 +13,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('login', [LoginController::class, 'login']); 
-Route::post('register', [RegisterController::class, 'store']);
-
-
 // proteger rutas
 
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::Resource('movies', MoviesController::class);
-    Route::get('List', [ListController::class, 'index']);
+Route::Resource('movies', MoviesController::class);
+Route::get('List', [ListController::class, 'index']);
 Route::get('Details', [DetailController::class, 'index']);
 Route::resource('comments', CommentController::class);
 
-});
