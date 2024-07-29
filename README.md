@@ -56,9 +56,6 @@ localhost/peliculas/api/Details
  
  ##### <span style="color:#578574"> <strong style="color:#578574"> api/List </strong> </span> - se obtienen la lista de las peliculas  (titulo, sinopsis, poster)
 
- ##### <span style="color:#578574"> <strong style="color:#578574"> api/register </strong> </span> - se puede registrar un usuario nuevo
-
-  ##### <span style="color:#578574"> <strong style="color:#578574"> api/login </strong> </span> - se puede realizar un login al sistena
 
   ###### Comentarios
 
